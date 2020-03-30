@@ -35,7 +35,7 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().hide();
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
@@ -72,7 +72,7 @@ public class SignUp extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SignUp.this,SignUp.class);
+                Intent i = new Intent(SignUp.this,MainActivity.class);
                 startActivity(i);
             }
         });

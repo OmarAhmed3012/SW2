@@ -13,6 +13,16 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -20,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox checkBox;
     ImageButton signin;
     Button signup;
+    RequestQueue LoginRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +45,21 @@ public class MainActivity extends AppCompatActivity {
 
         signup = (Button) findViewById(R.id.signup);
 
+        LoginRequest = Volley.newRequestQueue(this);
+
         signin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this,"Sign In Button Clicked",Toast.LENGTH_LONG).show();
+//                Toast.makeText(MainActivity.this,"Sign In Button Clicked",Toast.LENGTH_LONG).show();
+                if (email.getText().toString().equals("")){
+                    Toast.makeText(MainActivity.this,"Email is empty",Toast.LENGTH_SHORT).show();
+                }
+                else if (password.getText().toString().equals("")){
+                    Toast.makeText(MainActivity.this,"password is empty",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Login(email.getText().toString(),password.getText().toString());
+                }
             }
         });
 
@@ -48,5 +70,41 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    private void Login(String email,String password){
+        String LoginURL = "https://aboelwafa-taskmanagerapi-vtwo.herokuapp.com/users/login";
+        JSONObject user = new JSONObject();
+        Log.i("LOGINNN",password);
+        try {
+            user.put("email",email);
+            user.put("password",password);
+            Log.i("LOGINNN",email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest login = new JsonObjectRequest(Request.Method.POST, LoginURL, user, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject use = response.getJSONObject("user");
+                    Log.i("LOGINNN",response.getString("token"));
+                    Toast.makeText(MainActivity.this,"Welcome "+use.getString("name"),Toast.LENGTH_LONG).show();
+                } catch (Exception e) {
+                    Log.i("LOGINNN","Catch");
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("LOGINNN","Error");
+                Toast.makeText(MainActivity.this,"Error in Email or Password ",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        Log.i("LOGINNN","Finish");
+        LoginRequest.add(login);
     }
 }
