@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from 'src/app/task.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Task } from 'src/app/models/task.model';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-task-view',
@@ -9,22 +11,36 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class TaskViewComponent implements OnInit {
 
-  lists: any[]
-  Tasks: any[]
+  
+  tasks: Task[]
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  constructor(private taskService: TaskService,private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       (params: Params) => {
-        this.taskService.getTasks(params.listId).subscribe((tasks: any[]) => {
-          this.Tasks = tasks
-        })
+        if (this.taskService.getTasks()) {
+        this.taskService.getTasks().subscribe((tasks: Task[]) => {
+          this.tasks = tasks
+        }) }
+        else {
+          this.tasks = undefined;
+        }
       }
     )
-    this.taskService.getLists().subscribe((lists: any[]) => {
-      this.lists = lists
+   
+  }
+
+  onTaskClick(task: Task) {
+    //console.log('from task.component.ts')
+    this.taskService.complete(task).subscribe(() => {
+      console.log('Completed succesfully')
+      task.completed = !task.completed
     })
+  }
+
+  logout() {
+    this.authService.logout()
   }
 
   

@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 //const {MONGODB_URL} = require('../../config/constrains')  //process.env.MONGODB_URL
 /////
 mongoose.connect('mongodb://127.0.0.1:27017/TaskManager', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
 
 

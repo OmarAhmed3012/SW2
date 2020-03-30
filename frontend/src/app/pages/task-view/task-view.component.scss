@@ -77,6 +77,8 @@
     padding: 15px 20px;
     border-radius: 5px;
     margin-top: 10px;
+    font-size: x-large;
+    
 
     align-items: center;
     
@@ -98,7 +100,7 @@
         }
     }
 
-    &.completed .task-text {
+    &.completed  {
         text-decoration: line-through;
         opacity: 0.8;
     }
@@ -124,6 +126,17 @@
     width: 50px;
     border-radius: 50%;
     
+}
+
+.logout {
+    position: absolute;
+    margin-top: 50px;
+    margin-right: 850px;
+    bottom: 35px;
+    right: 35px;
+    height: 50px;
+    width: 50px;
+        
 }
 
 .empty-state-text {
