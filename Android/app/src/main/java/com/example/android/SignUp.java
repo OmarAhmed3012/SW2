@@ -81,7 +81,7 @@ public class SignUp extends AppCompatActivity {
     }
 
     private void register(String s_name ,String s_email ,String s_password){
-        String u = "https://aboelwafa-taskmanagerapi-vtwo.herokuapp.com/users";
+        String u = "http://10.0.2.2:3000/users";
 //                "http://10.0.2.2:3000/weather?address=giza";
         JSONObject jsonObject = new JSONObject();
         try {

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Login(String email,String password){
-        String LoginURL = "https://aboelwafa-taskmanagerapi-vtwo.herokuapp.com/users/login";
+        String LoginURL = "http://10.0.2.2:3000/users/login";
         JSONObject user = new JSONObject();
         Log.i("LOGINNN",password);
         try {
@@ -90,7 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONObject use = response.getJSONObject("user");
                     Log.i("LOGINNN",response.getString("token"));
+                    Intent intent = new Intent(MainActivity.this,Home.class);
+                    startActivity(intent);
                     Toast.makeText(MainActivity.this,"Welcome "+use.getString("name"),Toast.LENGTH_LONG).show();
+                    finish();
                 } catch (Exception e) {
                     Log.i("LOGINNN","Catch");
                     e.printStackTrace();
