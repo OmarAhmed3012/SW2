@@ -1,5 +1,4 @@
 package com.example.android;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,10 +18,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.android.model.USER;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -89,7 +88,10 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try {
                     JSONObject use = response.getJSONObject("user");
-                    Log.i("LOGINNN",response.getString("token"));
+                    Log.i("LOGINNN",response.getString("token") +"\n"+use.getString("name"));
+                    USER.setName(use.getString("name"));
+                    USER.setToken(response.getString("token"));
+                    Log.i("LOGINNN",USER.getName());
                     Intent intent = new Intent(MainActivity.this,Home.class);
                     startActivity(intent);
                     Toast.makeText(MainActivity.this,"Welcome "+use.getString("name"),Toast.LENGTH_LONG).show();

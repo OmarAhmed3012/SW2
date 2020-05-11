@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimary">#444444</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#444444</color>
     <color name="lightblue">#7535AD</color>
+
+    <color name="startItem1">#FEBD18</color>
+    <color name="EndItem1">#E4A401</color>
+
+    <color name="startItem2">#4D79FF</color>
+    <color name="EndItem2">#0039E3</color>
+
+    <color name="startItem3">#00833C</color>
+    <color name="EndItem3">#006622</color>
+
+    <color name="startItem4">#993399</color>
+    <color name="EndItem4">#602060</color>
+
+    <color name="ColorText">#ececec</color>
+    <color name="ColorBackground">#50ffffff</color>
+    <color name="ColorWhite">#FFF</color>
 </resources>
